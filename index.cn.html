@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刀刀宁 - 学术主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #fafafa;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 0.85em;
+        }
+
+        .lang-switch a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 1px;
+        }
+
+        .lang-switch a:hover {
+            opacity: 1;
+            border-bottom-color: white;
+        }
+        
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        header .subtitle {
+            font-size: 1em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+        
+        header .info {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-value {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+        
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        section h2 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .research-item {
+            background: #f8f9ff;
+            padding: 12px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .research-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.15);
+        }
+        
+        .research-item h3 {
+            color: #667eea;
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+        
+        .research-item p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .publication-category {
+            margin-bottom: 10px;
+            margin-top: 18px;
+        }
+
+        .publication-category:first-child {
+            margin-top: 0;
+        }
+        
+        .publication-category h3 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 4px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e0e7ff;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        .publication-category .category-desc {
+            font-size: 0.78em;
+            color: #aaa;
+            margin-bottom: 6px;
+            margin-top: 0;
+            line-height: 1.4;
+            font-style: normal;
+        }
+        
+        .publication-item {
+            background: #f8f9ff;
+            padding: 4px 8px;
+            margin-bottom: 3px;
+            border-left: 3px solid #667eea;
+            border-radius: 3px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.4;
+        }
+        
+        .publication-item h4 {
+            color: #333;
+            font-size: 0.9em;
+            margin: 0;
+            font-weight: 600;
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .publication-authors {
+            font-size: 0.75em;
+            color: #888;
+            text-align: right;
+            flex: 0 0 280px;
+            min-width: 280px;
+        }
+        
+        .publication-meta {
+            font-size: 0.8em;
+            color: #666;
+            margin: 0;
+            white-space: nowrap;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        
+        .publication-meta .venue {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 0.85em;
+        }
+        
+        .publication-links {
+            display: flex;
+            gap: 4px;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        
+        .pub-link {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 5px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .pub-link:hover {
+            background: #764ba2;
+        }
+        
+        .citation-count {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 1px 6px;
+            background: #fff3cd;
+            color: #856404;
+            border-radius: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 0.7em;
+            padding: 1px 3px;
+            border-radius: 2px;
+            font-weight: 500;
+            margin: 0;
+            white-space: nowrap;
+        }
+        
+        .status-published {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-submitted {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-wip {
+            background: #e7d4f5;
+            color: #663399;
+        }
+        
+        .education-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .education-item h3 {
+            color: #667eea;
+            font-size: 1em;
+            margin-bottom: 3px;
+        }
+        
+        .education-item .institution {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 2px;
+        }
+        
+        .education-item .period {
+            color: #999;
+            font-size: 0.85em;
+        }
+        
+        .links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .link-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: 500;
+        }
+        
+        .link-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+        
+        .link-button.secondary {
+            background: #e0e7ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .link-button.secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .research-areas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>刀刀宁</h1>
+            <div class="lang-switch"><a href="index.html">English</a></div>
+            <div class="subtitle">主要研究领域：机器学习系统 / 自然语言处理 / 计算机视觉</div>
+            <!-- <div class="info">National University of Defense Technology</div>-->
+            
+            <!-- <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">1,875</div>
+                    <div class="stat-label">Citations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Research Areas</div>
+                </div>
+            </div> -->
+        </header>
+        
+        <!--<section id="about">
+            <h2>About Me</h2>
+            <p>
+                I am focusing on cutting-edge research in machine learning systems, natural language processing, and computer vision. My work aims to advance the state-of-the-art in these interconnected  fields, with particular emphasis on scalable and efficient solutions for real-world applications.
+            </p>
+        </section>-->
+        
+        <section id="publications">
+            <h2>近期发表论文：大语言模型推理</h2>
+            
+            <div class="publication-category">
+                <h3>投机推理</h3>
+                <p class="category-desc">面向 CPU-GPU 异构环境，通过动态优化的推测解码加速大语言模型推理。</p>
+                <div class="publication-item">
+                    <h4>Dovetail: Speculative Inference in Consumer-Grade CPU-GPU Heterogeneous Environments</h4>
+                    <div class="publication-authors">Libo Zhang, <b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">EMNLP 2025</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/13634441442" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://arxiv.org/abs/2412.18934" class="pub-link" target="_blank">arXiv</a>
+                    </div>
+                </div>
+                <p class="category-desc">面向服务环境，动态调整投机解码并发度提高服务整体效率。</p>
+                <div class="publication-item">
+                    <h4>Nightjar: Dynamic Speculative Inference Activation in Cloud Services</h4>
+                    <div class="publication-authors">Rui Li, <b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">JSA 2026</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/1985277543788614132" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://arxiv.org/abs/2512.22420" class="pub-link" target="_blank">arXiv</a>
+                    </div>
+                </div>
+                
+                <p class="category-desc">面向多模态大模型的动态优化的投机解码加速方法。</p>
+                <div class="publication-item">
+                    <h4>Sparrow: Vision Token Pruning in Multimodal Speculative Inference</h4>
+                    <div class="publication-authors">Libo Zhang, <b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">ACL 2026</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/1987557439990691387" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://arxiv.org/abs/2602.15318" class="pub-link" target="_blank">arXiv</a>
+                    </div>
+                </div>
+                <div class="publication-item">
+                    <h4>ParaSparrow: Block-Parallel Drafting for Efficient Speculative Decoding in Vision-Language Models</h4>
+                    <div class="publication-meta">
+                        <span class="status-badge status-wip">在研</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="publication-category">
+                <h3>混合专家模型优化</h3>
+                <p class="category-desc">面向 CPU GPU 异构环境的混合专家模型专家调度方法，达成异构设备上的 EPLB。</p>
+                <div class="publication-item">
+                    <h4>LayerScope: Expert Coordination and Scheduling in CPU-GPU Heterogeneous Environments</h4>
+                    <div class="publication-authors">Enda Yu, Dezun Dong*, <b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICS 2026</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/1934276115003847369" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://arxiv.org/abs/2509.23638" class="pub-link" target="_blank">arXiv</a>
+                    </div>
+                </div>
+                <p class="category-desc">面向混合专家模型的动态剪枝，提升效率。</p>
+                <div class="publication-item">
+                    <h4>Alloc-MoE: Expert-Level Dynamic Pruning for Mixture-of-Experts Models</h4>
+                    <div class="publication-authors">Baihui Liu, <b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">ACL 2026</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/2027132593124962554" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://arxiv.org/abs/2604.08133" class="pub-link" target="_blank">arXiv</a>
+                    </div>
+                </div>                
+                <!-- <div class="publication-item">
+                    <h4>PDScope: Breaking the Prefill-Decode Seesaw for Memory-Bound MoE Inference</h4>
+                    <div class="publication-meta">
+                        <span class="status-badge status-submitted">审稿中</span>
+                    </div>
+                </div>
+                <div class="publication-item">
+                    <h4>M3MoE: Multi-Level Routing Capacity Allocation for Extremely Sparse Multimodal MoE Inference</h4>
+                    <div class="publication-meta">
+                        <span class="status-badge status-submitted">审稿中</span>
+                    </div>
+                </div>-->
+            </div>
+            
+            <div class="publication-category">
+                <h3>上下文压缩</h3>
+                <p class="category-desc">面向多轮对话与长序列处理的先进上下文压缩技术。</p>
+                <div class="publication-item">
+                    <h4>Rhea: Context Compression for Multi-turn Conversations</h4>
+                    <div class="publication-authors">Wanyang Hong, <b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">AACL-IJCNLP 2026</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/1974529752774762715" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://arxiv.org/abs/2512.06869" class="pub-link" target="_blank">arXiv</a>
+                    </div>
+                </div>
+                <!--
+                <div class="publication-item">
+                    <h4>Rhea-Coding: Context Compression for Coding Tasks</h4>
+                    <div class="publication-meta">
+                        <span class="status-badge status-wip">在研</span>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <h4>Context Quantization for Efficient Long-Sequence Processing</h4>
+                    <div class="publication-meta">
+                        <span class="status-badge status-wip">在研</span>
+                    </div>
+                </div>-->
+            </div>
+            
+            <div class="publication-category">
+                <h3>模型量化</h3>
+                <p class="category-desc">面向大语言模型高效部署的模型量化与混合精度方法。</p>
+                <div class="publication-item">
+                    <h4>DartMQ: Model Quantization Framework</h4>
+                    <div class="publication-authors"><b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICIC 2026</span>
+                        <span class="status-badge status-published">已发表</span>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://github.com/zzningxp/DartMQ" class="pub-link" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <h4>DartMoQP: A Unified Framework for Mixed-Precision Quantization and Pruning of Mixture-of-Experts Models</h4>
+                    <div class="publication-authors"><b>Zhaoning Zhang*</b>, et al.</div>
+                    <div class="publication-links">
+                        <a href="https://zhuanlan.zhihu.com/p/2078253964974371120" class="pub-link" target="_blank">知乎解读</a>
+                        <a href="https://github.com/zzningxp/DartMoQ" class="pub-link" target="_blank">GitHub(Algorithm)</a>
+                        <a href="https://github.com/zzningxp/DartMoQ-Qwen3.5" class="pub-link" target="_blank">GitHub(Accelerate)</a>
+                    </div>
+                </div>
+                <!--
+                <div class="publication-item">
+                    <h4>Mixed-Precision Quantization Methods</h4>
+                    <div class="publication-meta">
+                        <span class="status-badge status-wip">在研</span>
+                    </div>
+                </div>  -->
+            </div>
+            
+        </section>
+        
+        <section id="past-research">
+            <h2>过往研究：计算机视觉与分布式系统</h2>
+
+            <div class="publication-category">
+                <h3>计算机视觉与知识蒸馏</h3>
+
+                <div class="publication-item">
+                    <h4>Balance Divergence for Knowledge Distillation</h4>
+                    <div class="publication-authors">Y Qi, C Wang, Z Zhang, Y Liu, Y Zhang</div>
+                    <div class="publication-meta">
+                        <span class="venue">EAAI 2026</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>SelfDN: Adaptive Self-Denoising for Multi-View 3D Object Detection</h4>
+                    <div class="publication-authors">Y Qi, M Yang, Y Zhang, B Xiong, Y Liu, Z Zhang</div>
+                    <div class="publication-meta">
+                        <span class="venue">KBS 2025</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Modal Mimicking Knowledge Distillation for Monocular Three-Dimensional Object Detection</h4>
+                    <div class="publication-authors">M Yang, Y Qi, B Xiong, Z Zhang, Y Liu</div>
+                    <div class="publication-meta">
+                        <span class="venue">EAAI 2025</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Adaptive Selective Knowledge Distillation: Not Blindly Accepting Teachers as Oracles</h4>
+                    <div class="publication-authors">B Peng, <b>Z Zhang*</b>, Y Qi, L Qiao</div>
+                    <div class="publication-meta">
+                        <span class="venue">PRCV 2024</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Deep Tiny Network for Recognition-Oriented Face Image Quality Assessment</h4>
+                    <div class="publication-authors">B Peng, M Liu, Z Zhang, K Xu, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICVM 2024</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>ThunderNet: Towards Real-Time Generic Object Detection on Mobile Devices</h4>
+                    <div class="publication-authors">Z Qin, Z Li, <b>Z Zhang*</b>, Y Bao, G Yu, Y Peng, J Sun</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICCV 2019</span>
+                        <span class="citation-count">>400 引用</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Correlation Congruence for Knowledge Distillation</h4>
+                    <div class="publication-authors">B Peng, X Jin, J Liu, D Li, Y Wu, Y Liu, S Zhou, Z Zhang</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICCV 2019</span>
+                        <span class="citation-count">>800 引用</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>FD-MobileNet: Improved MobileNet with a Fast Downsampling Strategy</h4>
+                    <div class="publication-authors">Z Qin, <b>Z Zhang*</b>, X Chen, C Wang, Y Peng</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICIP 2018</span>
+                        <span class="citation-count">>100 引用</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Loss Rank Mining: A General Hard Example Mining Method for Real-Time Detectors</h4>
+                    <div class="publication-authors">H Yu, <b>Z Zhang*</b>, Z Qin, H Wu, D Li, J Zhao, X Lu</div>
+                    <div class="publication-meta">
+                        <span class="venue">IJCNN 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Merging and Evolution: Improving Convolutional Neural Networks for Mobile Applications</h4>
+                    <div class="publication-authors">Z Qin, <b>Z Zhang*</b>, S Zhang, H Yu, J Li, Y Peng</div>
+                    <div class="publication-meta">
+                        <span class="venue">IJCNN 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Diagonalwise Refactorization: An Efficient Training Method for Depthwise Convolutions</h4>
+                    <div class="publication-authors">Z Qin, <b>Z Zhang*</b>, D Li, Y Zhang, Y Peng</div>
+                    <div class="publication-meta">
+                        <span class="venue">IJCNN 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Merging-and-Evolution Networks for Mobile Vision Applications</h4>
+                    <div class="publication-authors">Z Qin, <b>Z Zhang*</b>, S Zhang, H Yu, Y Peng</div>
+                    <div class="publication-meta">
+                        <span class="venue">IEEE Access 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>An Empirical Study of Face Recognition Under Variations</h4>
+                    <div class="publication-authors">B Peng, H Yang, D Li, Z Zhang</div>
+                    <div class="publication-meta">
+                        <span class="venue">FG 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Border-Oriented Post-Processing Refinement on Detected Vehicle Bounding Box for ADAS</h4>
+                    <div class="publication-authors">X Chen, <b>Z Zhang*</b>, M Li, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICGIP 2017</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>S-OHEM: Stratified Online Hard Example Mining for Object Detection</h4>
+                    <div class="publication-authors">M Li, <b>Z Zhang*</b>, H Yu, X Chen, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">CCV 2017</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="publication-category">
+                <h3>分布式系统与深度学习基础设施</h3>
+
+                <div class="publication-item">
+                    <h4>Delta: Memory-Efficient Training via Dynamic Fine-Grained Recomputation and Swapping</h4>
+                    <div class="publication-authors">Y Tang, Q Li, L Yin, D Li, Y Zhang, C Wang, X Zhang, L Qiao, Z Zhang, et al.</div>
+                    <div class="publication-meta">
+                        <span class="venue">TACO 2024</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Parax: Boosting Deep Learning for Big Data Analytics on Many-Core CPUs</h4>
+                    <div class="publication-authors">L Yin, Y Zhang, Z Zhang, Y Peng, P Zhao</div>
+                    <div class="publication-meta">
+                        <span class="venue">VLDB 2021</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Increasing Momentum-Like Factors: A Method for Reducing Training Errors on Multiple GPUs</h4>
+                    <div class="publication-authors">Y Tang, Z Kan, L Yin, Z Lai, Z Zhang, L Qiao, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">Tsinghua Sci. &amp; Technol. 2021</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>HPDL: Towards a General Framework for High-Performance Distributed Deep Learning</h4>
+                    <div class="publication-authors">D Li, Z Lai, K Ge, Y Zhang, Z Zhang, Q Wang, H Wang</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICDCS 2019</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Rise the Momentum: A Method for Reducing the Training Error on Multiple GPUs</h4>
+                    <div class="publication-authors">Y Tang, L Yin, Z Zhang, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICAPP 2019</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>A Quick Survey on Large Scale Distributed Deep Learning Systems</h4>
+                    <div class="publication-authors"><b>Z Zhang</b>, L Yin, Y Peng, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICPADS 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>An Experimental Perspective for Computation-Efficient Neural Networks Training</h4>
+                    <div class="publication-authors">L Yin, X Chen, Z Qin, <b>Z Zhang*</b>, J Feng, D Li</div>
+                    <div class="publication-meta">
+                        <span class="venue">ACA 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Workload Characterization and Evolutionary Analyses of Tianhe-1A Supercomputer</h4>
+                    <div class="publication-authors">J Feng, G Liu, J Zhang, Z Zhang, J Yu, Z Zhang</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICCS 2018</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Grapha: Adaptive Partitioning for Natural Graphs</h4>
+                    <div class="publication-authors">D Li, C Zhang, J Wang, Z Zhang, Y Zhang</div>
+                    <div class="publication-meta">
+                        <span class="venue">ICDCS 2017</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>Large-Scale Virtual Machines Provisioning in Clouds: Challenges and Approaches</h4>
+                    <div class="publication-authors"><b>Z Zhang</b>, D Li, K Wu</div>
+                    <div class="publication-meta">
+                        <span class="venue">Front. Comput. Sci. 2016</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>DSS: A Scalable and Efficient Stratified Sampling Algorithm for Large-Scale Datasets</h4>
+                    <div class="publication-authors">M Li, D Li, S Shen, <b>Z Zhang*</b>, X Lu</div>
+                    <div class="publication-meta">
+                        <span class="venue">NPC 2016</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>VMThunder: Fast Provisioning of Large-Scale Virtual Machine Clusters</h4>
+                    <div class="publication-authors"><b>Z Zhang</b>, Z Li, K Wu, D Li, H Li, Y Peng, X Lu</div>
+                    <div class="publication-meta">
+                        <span class="venue">TPDS 2014</span>
+                        <span class="citation-count">>50 引用</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>RAFlow: Read Ahead Accelerated I/O Flow Through Multiple Virtual Layers</h4>
+                    <div class="publication-authors"><b>Z Zhang</b>, K Wu, H Li, J Feng, Y Peng, X Lu</div>
+                    <div class="publication-meta">
+                        <span class="venue">NAS 2014</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>DLSM: Decoupled Live Storage Migration with Distributed Device Mapper Storage</h4>
+                    <div class="publication-authors"><b>Z Zhang</b>, Z Li, K Wu, H Li, Y Peng, X Lu</div>
+                    <div class="publication-meta">
+                        <span class="venue">SOSE 2014</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>CoCache: Multi-Layer Multi-Path Cooperative Cache Accelerating the Deployment of Large Scale Virtual Machines</h4>
+                    <div class="publication-authors">Z Li, <b>Z Zhang*</b>, H Li, Y Peng</div>
+                    <div class="publication-meta">
+                        <span class="venue">SOSE 2014</span>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <h4>A Reality Check of Multiple Snowball Tree File Dissemination in Large Scale Cloud Cluster</h4>
+                    <div class="publication-authors"><b>Z Zhaoning</b>, L Xicheng, P Yuxing, L Huiba</div>
+                    <div class="publication-meta">
+                        <span class="venue">ISORC 2012</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 12px;">
+                <a href="https://scholar.google.com/citations?user=E_J1q2AAAAAJ&amp;hl=en" target="_blank">在 Google Scholar 查看全部 →</a>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>联系方式</h2>
+            <p style="margin-bottom: 12px;">
+                欢迎就研究合作与学术交流与我联系，可通过以下方式找到我：
+            </p>
+            <ul style="list-style: none; margin: 0; padding: 0;">
+                <li"><a href="mailto:zznignxp@qq.com" style="color: #667eea; text-decoration: none; border-bottom: 1px solid #667eea;">Email: zznignxp@qq.com</a></li>
+                <li><a href="https://github.com/zzningxp" target="_blank" style="color: #667eea; text-decoration: none; border-bottom: 1px solid #667eea;">GitHub: github.com/zzningxp</a></li>
+                <li><a href="https://www.zhihu.com/people/zzningxp" target="_blank" style="color: #667eea; text-decoration: none; border-bottom: 1px solid #667eea;">知乎: 刀刀宁</a></li>
+            </ul>
+        </section>
+        
+        <footer>
+            <p>&copy; 2024 zzningxp. 保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>
